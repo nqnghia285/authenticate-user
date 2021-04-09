@@ -3,6 +3,9 @@ import { SignOptions, Secret, verify, sign } from 'jsonwebtoken';
 import { Socket } from 'socket.io';
 import { RequestType, UserInfo } from './lib/interface';
 import log from './lib/log';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const jwtKey: Secret = process.env.JWT_KEY || 'jwt-key-dev';
 
