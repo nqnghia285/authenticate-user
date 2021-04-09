@@ -1,9 +1,10 @@
 {
   "name": "authenticate-user",
   "author": "nqnghia285",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "private": false,
   "description": "Library authenticate user with JWT",
+  "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "devDependencies": {
