@@ -1,13 +1,13 @@
-import { Request } from 'express';
-import { SignOptions, Secret, verify, sign } from 'jsonwebtoken';
-import { Socket } from 'socket.io';
-import { RequestType, UserInfo } from './lib/interface';
-import log from './lib/log';
-import dotenv from 'dotenv';
+import { Request } from "express";
+import { SignOptions, Secret, verify, sign } from "jsonwebtoken";
+import { Socket } from "socket.io";
+import { RequestType, UserInfo } from "./lib/interface";
+import log from "./lib/log";
+import dotenv from "dotenv";
 
 dotenv.config();
 
-const jwtKey: Secret = process.env.JWT_KEY || 'jwt-key-dev';
+const jwtKey: Secret = process.env.JWT_KEY || "jwt-key-dev";
 
 /**
  * @method authenticateUser: Return payload if token is valid, otherwise return undefined
@@ -15,14 +15,14 @@ const jwtKey: Secret = process.env.JWT_KEY || 'jwt-key-dev';
  * @returns UserInfo | undefined
  */
 export function authenticateUser(token: string): UserInfo | undefined {
-  try {
-    const obj: any = verify(token, jwtKey);
-    const payload: UserInfo = obj;
-    return payload;
-  } catch (error) {
-    log(error);
-    return undefined;
-  }
+    try {
+        const obj: any = verify(token, jwtKey);
+        const payload: UserInfo = obj;
+        return payload;
+    } catch (error) {
+        log(error);
+        return undefined;
+    }
 }
 
 /**
@@ -32,12 +32,12 @@ export function authenticateUser(token: string): UserInfo | undefined {
  * @returns string | undefined
  */
 export function createToken(payload: string | object | Buffer, option?: SignOptions | undefined): string | undefined {
-  try {
-    return sign(payload, jwtKey, option);
-  } catch (error) {
-    console.log(error);
-    return undefined;
-  }
+    try {
+        return sign(payload, jwtKey, option);
+    } catch (error) {
+        console.log(error);
+        return undefined;
+    }
 }
 
 /**
@@ -46,17 +46,17 @@ export function createToken(payload: string | object | Buffer, option?: SignOpti
  * @returns UserInfo | undefined
  */
 export function authenticateUserFromReq(req: Request | RequestType): UserInfo | undefined {
-  let userToken: string = req?.cookies?.token;
-  if (userToken !== undefined) {
-    // Remove 'Bearer ' from userToken
-    if (userToken.startsWith('Bearer ')) {
-      userToken = userToken.slice(7, userToken.length);
-    }
+    let userToken: string = req?.cookies?.token;
+    if (userToken !== undefined) {
+        // Remove 'Bearer ' from userToken
+        if (userToken.startsWith("Bearer ")) {
+            userToken = userToken.slice(7, userToken.length);
+        }
 
-    return authenticateUser(userToken);
-  } else {
-    return undefined;
-  }
+        return authenticateUser(userToken);
+    } else {
+        return undefined;
+    }
 }
 
 /**
@@ -65,6 +65,6 @@ export function authenticateUserFromReq(req: Request | RequestType): UserInfo | 
  * @returns UserInfo | undefined
  */
 export function authenticateUserFromSocket(socket: Socket): UserInfo | undefined {
-  const req: RequestType = socket.request;
-  return authenticateUserFromReq(req);
+    const req: RequestType = socket.request;
+    return authenticateUserFromReq(req);
 }
