@@ -1,19 +1,19 @@
 {
     "name": "authenticate-user",
     "author": "nqnghia285",
-    "version": "1.1.8",
+    "version": "1.1.9",
     "private": false,
     "description": "Library authenticate user with JWT",
     "license": "MIT",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "devDependencies": {
-        "@types/express": "^4.17.11",
-        "@types/jsonwebtoken": "^8.5.1",
-        "@types/node": "^14.14.37",
         "typescript": "^4.2.4"
     },
     "dependencies": {
+        "@types/express": "^4.17.11",
+        "@types/jsonwebtoken": "^8.5.1",
+        "@types/node": "^14.14.37",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "jsonwebtoken": "^8.5.1",
