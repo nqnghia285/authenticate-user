@@ -1,6 +1,6 @@
-/// <reference path="lib/interface/index.ts" />
-/// <reference types="jsonwebtoken" />
-/// <reference types="socket.io" />
+// / <reference path="lib/interface/index.ts" />
+// / <reference types="jsonwebtoken" />
+// / <reference types="socket.io" />
 
 import { SignOptions } from "jsonwebtoken";
 import { RequestType, UserInfo } from "./lib/interface";
