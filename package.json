@@ -1,18 +1,18 @@
 {
     "name": "authenticate-user",
     "author": "nghia <nqnghia285@gmail.com>",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "private": false,
     "description": "Library authenticate user with JWT",
     "license": "MIT",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "echo \"Error: no test specified $npm_package_version\" && exit 1",
         "prepare": "tsc",
-        "version": "yarn format && git add -A src",
-        "postversion": "git push && git push --tags",
-        "git": "git add -A && git commit -m \"Setup Package\" && git push"
+        "git": "git add -A && git commit -m \"Update version: %npm_package_version%\" && git push",
+        "push": "yarn publish",
+        "v": "yarn version --patch"
     },
     "repository": {
         "type": "git",
@@ -38,5 +38,8 @@
         "express": "^4.17.1",
         "jsonwebtoken": "^8.5.1",
         "socket.io": "^4.0.1"
+    },
+    "devDependencies": {
+        "cross-conf-env": "^1.2.1"
     }
 }
