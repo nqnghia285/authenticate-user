@@ -1,70 +1,70 @@
 import { Request } from "express";
-import { SignOptions, Secret, verify, sign } from "jsonwebtoken";
+import { Secret, sign, SignOptions, verify, VerifyOptions } from "jsonwebtoken";
 import { Socket } from "socket.io";
-import { RequestType, UserInfo } from "./lib/interface";
-import log from "./lib/log";
-import dotenv from "dotenv";
+import { RequestType } from "./lib/interface";
 
-dotenv.config();
-
-const jwtKey: Secret = process.env.JWT_KEY || "jwt-key-dev";
+let _tokenName = "token";
 
 /**
- * @method authenticateUser: Return payload if token is valid, otherwise return undefined
- * @param token
- * @returns UserInfo | undefined
+ * @method setTokenName Set token name which is gotten in cookie of header in request
+ * @param tokenName string
  */
-export function authenticateUser(token: string): UserInfo | undefined {
+export function setTokenName(tokenName: string): void {
+    _tokenName = tokenName;
+}
+
+/**
+ * @method authenticateUser Return payload if token is valid, otherwise return undefined
+ * @param token string
+ * @param jwtKey Secret
+ * @param options VerifyOptions | undefined
+ * @returns string | object | undefined
+ */
+export function authenticateUser(token: string, jwtKey: Secret, options?: VerifyOptions | undefined): string | object | undefined {
     try {
-        const obj: any = verify(token, jwtKey);
-        const payload: UserInfo = obj;
-        return payload;
+        return verify(token, jwtKey, options);
     } catch (error) {
-        log(error);
+        console.log("Error: ", error);
         return undefined;
     }
 }
 
 /**
- * @method createToken: Return an encoded token if the function is not error, otherwise return undefined
- * @param payload
- * @param option
+ * @method createToken Return an encoded token if the function is not error, otherwise return undefined
+ * @param payload string | object | Buffer
+ * @param jwtKey Secret
+ * @param option SignOptions | undefined
  * @returns string | undefined
  */
-export function createToken(payload: string | object | Buffer, option?: SignOptions | undefined): string | undefined {
+export function createToken(payload: string | object | Buffer, jwtKey: Secret, options?: SignOptions | undefined): string | undefined {
     try {
-        return sign(payload, jwtKey, option);
+        return sign(payload, jwtKey, options);
     } catch (error) {
-        console.log(error);
+        console.log("Error: ", error);
         return undefined;
     }
 }
 
 /**
- * @method authenticateUserFromReq: Return payload if token is valid, otherwise return undefined
- * @param req
- * @returns UserInfo | undefined
+ * @method authenticateUserFromReq Return payload if token is valid, otherwise return undefined
+ * @param req Request | RequestType
+ * @param jwtKey Secret
+ * @param options VerifyOptions | undefined
+ * @returns string | object | undefined
  */
-export function authenticateUserFromReq(req: Request | RequestType): UserInfo | undefined {
-    let userToken: string = req?.cookies?.token;
-    if (userToken !== undefined) {
-        // Remove 'Bearer ' from userToken
-        if (userToken.startsWith("Bearer ")) {
-            userToken = userToken.slice(7, userToken.length);
-        }
-
-        return authenticateUser(userToken);
-    } else {
-        return undefined;
-    }
+export function authenticateUserFromReq(req: Request | RequestType, jwtKey: Secret, options?: VerifyOptions | undefined): string | object | undefined {
+    let userToken: string = req?.cookies[_tokenName];
+    return authenticateUser(userToken, jwtKey, options);
 }
 
 /**
  * @method authenticateUserFromSocket
  * @param socket
- * @returns UserInfo | undefined
+ * @param jwtKey Secret
+ * @param options VerifyOptions | undefined
+ * @returns string | object | undefined
  */
-export function authenticateUserFromSocket(socket: Socket): UserInfo | undefined {
+export function authenticateUserFromSocket(socket: Socket, jwtKey: Secret, options?: VerifyOptions | undefined): string | object | undefined {
     const req: RequestType = socket.request;
-    return authenticateUserFromReq(req);
+    return authenticateUserFromReq(req, jwtKey, options);
 }

@@ -1,13 +1,18 @@
-import { Secret, SignOptions, VerifyOptions } from "jsonwebtoken";
-import { RequestType } from "./lib/interface";
-import { Socket } from "socket.io";
+# Authenticate User [![Build Status](https://github.com/Links2004/arduinoWebSockets/workflows/CI/badge.svg?branch=master)](https://github.com/nqnghia285/authenticate-user.git)
 
+Authenticate User help us verify json web token cookie to authenticate user.
+
+### Functions:
+
+```typescript
 /**
  * @method setTokenName Set token name which is gotten in cookie of header in request
  * @param tokenName string
  */
-export declare function setTokenName(tokenName: string): void;
+function setTokenName(tokenName: string): void;
+```
 
+```typescript
 /**
  * @method authenticateUser Return payload if token is valid, otherwise return undefined
  * @param token string
@@ -15,8 +20,10 @@ export declare function setTokenName(tokenName: string): void;
  * @param options VerifyOptions | undefined
  * @returns string | object | undefined
  */
-export declare function authenticateUser(token: string, jwtKey: Secret, options?: VerifyOptions | undefined): string | object | undefined;
+function authenticateUser(token: string, jwtKey: Secret, options?: VerifyOptions | undefined): string | object | undefined;
+```
 
+```typescript
 /**
  * @method createToken Return an encoded token if the function is not error, otherwise return undefined
  * @param payload string | object | Buffer
@@ -24,8 +31,10 @@ export declare function authenticateUser(token: string, jwtKey: Secret, options?
  * @param option SignOptions | undefined
  * @returns string | undefined
  */
-export declare function createToken(payload: string | object | Buffer, jwtKey: Secret, options?: SignOptions | undefined): string | undefined;
+function createToken(payload: string | object | Buffer, jwtKey: Secret, options?: SignOptions | undefined): string | undefined;
+```
 
+```typescript
 /**
  * @method authenticateUserFromReq Return payload if token is valid, otherwise return undefined
  * @param req Request | RequestType
@@ -33,8 +42,10 @@ export declare function createToken(payload: string | object | Buffer, jwtKey: S
  * @param options VerifyOptions | undefined
  * @returns string | object | undefined
  */
-export declare function authenticateUserFromReq(req: Request | RequestType, jwtKey: Secret, options?: VerifyOptions | undefined): string | object | undefined;
+function authenticateUserFromReq(req: Request | RequestType, jwtKey: Secret, options?: VerifyOptions | undefined): string | object | undefined;
+```
 
+```typescript
 /**
  * @method authenticateUserFromSocket
  * @param socket
@@ -42,4 +53,5 @@ export declare function authenticateUserFromReq(req: Request | RequestType, jwtK
  * @param options VerifyOptions | undefined
  * @returns string | object | undefined
  */
-export declare function authenticateUserFromSocket(socket: Socket, jwtKey: Secret, options?: VerifyOptions | undefined): string | object | undefined;
+function authenticateUserFromSocket(socket: Socket, jwtKey: Secret, options?: VerifyOptions | undefined): string | object | undefined;
+```
