@@ -1,43 +1,43 @@
 {
-    "name": "authenticate-user",
-    "author": "nghia <nqnghia285@gmail.com>",
-    "version": "1.2.5",
-    "private": false,
-    "description": "Library authenticate user with JWT",
-    "license": "MIT",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "scripts": {
-        "test": "echo \"Error: no test specified $npm_package_version\" && exit 1",
-        "prepare": "tsc",
-        "git": "git add -A && git commit -m \"Update version: %npm_package_version%\" && git push",
-        "push": "yarn publish",
-        "v": "yarn version --patch"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/nqnghia285/authenticator.git"
-    },
-    "homepage": "https://github.com/nqnghia285/authenticator.git#readme",
-    "keywords": [
-        "authenticator",
-        "authenticateUserFromReq",
-        "authenticateUser",
-        "authenticateUserFromSocket",
-        "createToken"
-    ],
-    "files": [
-        "dist"
-    ],
-    "dependencies": {
-        "@types/express": "^4.17.11",
-        "@types/jsonwebtoken": "^8.5.1",
-        "@types/node": "^14.14.37",
-        "express": "^4.17.1",
-        "jsonwebtoken": "^8.5.1",
-        "socket.io": "^4.0.1"
-    },
-    "devDependencies": {
-        "cross-conf-env": "^1.2.1"
-    }
+	"name": "authenticate-user",
+	"author": "nghia <nqnghia285@gmail.com>",
+	"version": "1.2.6",
+	"private": false,
+	"description": "Library authenticate user with JWT",
+	"license": "MIT",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"scripts": {
+		"test": "echo \"Error: no test specified $npm_package_version\" && exit 1",
+		"prepare": "tsc",
+		"git": "git add -A && git commit -m \"Update version: %npm_package_version%\" && git push origin HEAD:master",
+		"push": "yarn publish",
+		"v": "yarn version --patch"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/nqnghia285/authenticator.git"
+	},
+	"homepage": "https://github.com/nqnghia285/authenticator.git#readme",
+	"keywords": [
+		"authenticator",
+		"authenticateUserFromReq",
+		"authenticateUser",
+		"authenticateUserFromSocket",
+		"createToken"
+	],
+	"files": [
+		"dist"
+	],
+	"dependencies": {
+		"@types/express": "^4.17.11",
+		"@types/jsonwebtoken": "^8.5.1",
+		"@types/node": "^14.14.37",
+		"express": "^4.17.1",
+		"jsonwebtoken": "^8.5.1",
+		"socket.io": "^4.0.1"
+	},
+	"devDependencies": {
+		"cross-conf-env": "^1.2.1"
+	}
 }
