@@ -5,12 +5,14 @@ import { RequestType } from "./lib/interface";
 
 let _tokenName = "token";
 
+export interface IRequest extends RequestType {}
+
 /**
  * @method setTokenName Set token name which is gotten in cookie of header in request
  * @param tokenName string
  */
 export function setTokenName(tokenName: string): void {
-    _tokenName = tokenName;
+	_tokenName = tokenName;
 }
 
 /**
@@ -21,12 +23,12 @@ export function setTokenName(tokenName: string): void {
  * @returns string | object | undefined
  */
 export function authenticateUser(token: string, jwtKey: Secret, options?: VerifyOptions | undefined): string | object | undefined {
-    try {
-        return verify(token, jwtKey, options);
-    } catch (error) {
-        console.log("Error: ", error);
-        return undefined;
-    }
+	try {
+		return verify(token, jwtKey, options);
+	} catch (error) {
+		console.log("Error: ", error);
+		return undefined;
+	}
 }
 
 /**
@@ -37,12 +39,12 @@ export function authenticateUser(token: string, jwtKey: Secret, options?: Verify
  * @returns string | undefined
  */
 export function createToken(payload: string | object | Buffer, jwtKey: Secret, options?: SignOptions | undefined): string | undefined {
-    try {
-        return sign(payload, jwtKey, options);
-    } catch (error) {
-        console.log("Error: ", error);
-        return undefined;
-    }
+	try {
+		return sign(payload, jwtKey, options);
+	} catch (error) {
+		console.log("Error: ", error);
+		return undefined;
+	}
 }
 
 /**
@@ -53,8 +55,8 @@ export function createToken(payload: string | object | Buffer, jwtKey: Secret, o
  * @returns string | object | undefined
  */
 export function authenticateUserFromReq(req: Request | RequestType, jwtKey: Secret, options?: VerifyOptions | undefined): string | object | undefined {
-    let userToken: string = req?.cookies[_tokenName];
-    return authenticateUser(userToken, jwtKey, options);
+	let userToken: string = req?.cookies[_tokenName];
+	return authenticateUser(userToken, jwtKey, options);
 }
 
 /**
@@ -65,6 +67,6 @@ export function authenticateUserFromReq(req: Request | RequestType, jwtKey: Secr
  * @returns string | object | undefined
  */
 export function authenticateUserFromSocket(socket: Socket, jwtKey: Secret, options?: VerifyOptions | undefined): string | object | undefined {
-    const req: RequestType = socket.request;
-    return authenticateUserFromReq(req, jwtKey, options);
+	const req: IRequest = socket.request;
+	return authenticateUserFromReq(req, jwtKey, options);
 }

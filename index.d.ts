@@ -2,6 +2,8 @@ import { Secret, SignOptions, VerifyOptions } from "jsonwebtoken";
 import { RequestType } from "./lib/interface";
 import { Socket } from "socket.io";
 
+export declare interface IRequest extends RequestType {}
+
 /**
  * @method setTokenName Set token name which is gotten in cookie of header in request
  * @param tokenName string
