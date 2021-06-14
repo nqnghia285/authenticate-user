@@ -2,7 +2,7 @@ import { Secret, SignOptions, VerifyOptions } from "jsonwebtoken";
 import { RequestType } from "./lib/interface";
 import { Socket } from "socket.io";
 
-export declare interface IRequest extends RequestType {}
+export declare type IRequest = Request | RequestType;
 
 /**
  * @method setTokenName Set token name which is gotten in cookie of header in request
@@ -30,16 +30,16 @@ export declare function createToken(payload: string | object | Buffer, jwtKey: S
 
 /**
  * @method authenticateUserFromReq Return payload if token is valid, otherwise return undefined
- * @param req Request | RequestType
+ * @param req IRequest
  * @param jwtKey Secret
  * @param options VerifyOptions | undefined
  * @returns string | object | undefined
  */
-export declare function authenticateUserFromReq(req: Request | RequestType, jwtKey: Secret, options?: VerifyOptions | undefined): string | object | undefined;
+export declare function authenticateUserFromReq(req: IRequest, jwtKey: Secret, options?: VerifyOptions | undefined): string | object | undefined;
 
 /**
  * @method authenticateUserFromSocket
- * @param socket
+ * @param socket Socket
  * @param jwtKey Secret
  * @param options VerifyOptions | undefined
  * @returns string | object | undefined

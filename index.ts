@@ -5,7 +5,7 @@ import { RequestType } from "./lib/interface";
 
 let _tokenName = "token";
 
-export interface IRequest extends RequestType {}
+export type IRequest = Request | RequestType;
 
 /**
  * @method setTokenName Set token name which is gotten in cookie of header in request
@@ -49,19 +49,19 @@ export function createToken(payload: string | object | Buffer, jwtKey: Secret, o
 
 /**
  * @method authenticateUserFromReq Return payload if token is valid, otherwise return undefined
- * @param req Request | RequestType
+ * @param req IRequest
  * @param jwtKey Secret
  * @param options VerifyOptions | undefined
  * @returns string | object | undefined
  */
-export function authenticateUserFromReq(req: Request | RequestType, jwtKey: Secret, options?: VerifyOptions | undefined): string | object | undefined {
-	let userToken: string = req?.cookies[_tokenName];
+export function authenticateUserFromReq(req: IRequest, jwtKey: Secret, options?: VerifyOptions | undefined): string | object | undefined {
+	let userToken: string = req.cookies[_tokenName];
 	return authenticateUser(userToken, jwtKey, options);
 }
 
 /**
  * @method authenticateUserFromSocket
- * @param socket
+ * @param socket Socket
  * @param jwtKey Secret
  * @param options VerifyOptions | undefined
  * @returns string | object | undefined

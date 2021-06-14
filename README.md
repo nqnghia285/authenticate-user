@@ -37,18 +37,18 @@ function createToken(payload: string | object | Buffer, jwtKey: Secret, options?
 ```typescript
 /**
  * @method authenticateUserFromReq Return payload if token is valid, otherwise return undefined
- * @param req Request | RequestType
+ * @param req IRequest
  * @param jwtKey Secret
  * @param options VerifyOptions | undefined
  * @returns string | object | undefined
  */
-function authenticateUserFromReq(req: Request | RequestType, jwtKey: Secret, options?: VerifyOptions | undefined): string | object | undefined;
+function authenticateUserFromReq(req: IRequest, jwtKey: Secret, options?: VerifyOptions | undefined): string | object | undefined;
 ```
 
 ```typescript
 /**
  * @method authenticateUserFromSocket
- * @param socket
+ * @param socket Socket
  * @param jwtKey Secret
  * @param options VerifyOptions | undefined
  * @returns string | object | undefined
