@@ -1,7 +1,7 @@
 {
 	"name": "authenticate-user",
 	"author": "nghia <nqnghia285@gmail.com>",
-	"version": "1.2.8",
+	"version": "1.2.9",
 	"private": false,
 	"description": "Library authenticate user with JWT",
 	"license": "MIT",
