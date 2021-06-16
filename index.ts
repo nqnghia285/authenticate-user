@@ -17,14 +17,18 @@ export function setTokenName(tokenName: string): void {
 
 /**
  * @method authenticateUser Return payload if token is valid, otherwise return undefined
- * @param token string
+ * @param token string | undefined
  * @param jwtKey Secret
  * @param options VerifyOptions | undefined
  * @returns string | object | undefined
  */
-export function authenticateUser(token: string, jwtKey: Secret, options?: VerifyOptions | undefined): string | object | undefined {
+export function authenticateUser(token: string | undefined, jwtKey: Secret, options?: VerifyOptions | undefined): string | object | undefined {
 	try {
-		return verify(token, jwtKey, options);
+		if (token) {
+			return verify(token, jwtKey, options);
+		} else {
+			return undefined;
+		}
 	} catch (error) {
 		console.log("Error: ", error);
 		return undefined;
@@ -33,14 +37,18 @@ export function authenticateUser(token: string, jwtKey: Secret, options?: Verify
 
 /**
  * @method createToken Return an encoded token if the function is not error, otherwise return undefined
- * @param payload string | object | Buffer
+ * @param payload string | object | Buffer | undefined
  * @param jwtKey Secret
  * @param option SignOptions | undefined
  * @returns string | undefined
  */
-export function createToken(payload: string | object | Buffer, jwtKey: Secret, options?: SignOptions | undefined): string | undefined {
+export function createToken(payload: string | object | Buffer | undefined, jwtKey: Secret, options?: SignOptions | undefined): string | undefined {
 	try {
-		return sign(payload, jwtKey, options);
+		if (payload) {
+			return sign(payload, jwtKey, options);
+		} else {
+			return undefined;
+		}
 	} catch (error) {
 		console.log("Error: ", error);
 		return undefined;
@@ -55,7 +63,7 @@ export function createToken(payload: string | object | Buffer, jwtKey: Secret, o
  * @returns string | object | undefined
  */
 export function authenticateUserFromReq(req: IRequest, jwtKey: Secret, options?: VerifyOptions | undefined): string | object | undefined {
-	let userToken: string = req.cookies[_tokenName];
+	let userToken: string | undefined = req.cookies?.[_tokenName];
 	return authenticateUser(userToken, jwtKey, options);
 }
 

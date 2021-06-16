@@ -12,21 +12,21 @@ export declare function setTokenName(tokenName: string): void;
 
 /**
  * @method authenticateUser Return payload if token is valid, otherwise return undefined
- * @param token string
+ * @param token string | undefined
  * @param jwtKey Secret
  * @param options VerifyOptions | undefined
  * @returns string | object | undefined
  */
-export declare function authenticateUser(token: string, jwtKey: Secret, options?: VerifyOptions | undefined): string | object | undefined;
+export declare function authenticateUser(token: string | undefined, jwtKey: Secret, options?: VerifyOptions | undefined): string | object | undefined;
 
 /**
  * @method createToken Return an encoded token if the function is not error, otherwise return undefined
- * @param payload string | object | Buffer
+ * @param payload string | object | Buffer | undefined
  * @param jwtKey Secret
  * @param option SignOptions | undefined
  * @returns string | undefined
  */
-export declare function createToken(payload: string | object | Buffer, jwtKey: Secret, options?: SignOptions | undefined): string | undefined;
+export declare function createToken(payload: string | object | Buffer | undefined, jwtKey: Secret, options?: SignOptions | undefined): string | undefined;
 
 /**
  * @method authenticateUserFromReq Return payload if token is valid, otherwise return undefined
